@@ -64,9 +64,6 @@ public:
 
 	void start(unsigned port = 8888, bool threaded=false);
 	void stop();
-	void setServerRoot(const std::string & fsroot);
-	void setUploadDir(const std::string & uploadDir);
-	void setCallbackExtensions(const std::string & cb_extensions);
 	void setMaxNumberClients(unsigned num_clients);
 	void setMaxNumberActiveClients(unsigned num_clients);
 	unsigned getNumberClients();
@@ -84,10 +81,7 @@ private:
 
 	ofxHTTPServer();
 	struct MHD_Daemon *http_daemon;
-	std::string fsRoot;
-	std::string uploadDir;
-	std::set<std::string> callbackExtensions;
-	bool callbackExtensionSet;
+	
 	unsigned port;
 	unsigned numClients;
 	unsigned maxClients;
@@ -104,10 +98,6 @@ private:
 
 	static void request_completed (void *cls, struct MHD_Connection *connection, void **con_cls,
 	                        enum MHD_RequestTerminationCode toe);
-
-	static int iterate_post (void *coninfo_cls, enum MHD_ValueKind kind, const char *key,
-							const char *filename, const char *content_type,
-							const char *transfer_encoding, const char *data, uint64_t off, size_t size);
 
 
 };
